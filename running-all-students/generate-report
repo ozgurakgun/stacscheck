@@ -144,7 +144,7 @@ run_single_student() {
         studentid=$(basename "$1")
 
         if [ "$USECGROUPS" = true ]; then
-            "${SCRIPTDIR}/setup_cgroup.sh" ${studentid}
+            "${SCRIPTDIR}/internal/setup_cgroup.sh" ${studentid}
             CGEXEC="cgexec -g memory,cpuacct:/stacscheck-${USER}/${studentid}"
         else
             CGEXEC=""
@@ -158,7 +158,7 @@ run_single_student() {
                    --tryharder \
                    > "${outdir}/txt/${studentid}.txt"
     ) &
-    ( sleep 5; studentid=$(basename "$1"); "${SCRIPTDIR}/cleanup_cgroup.sh" 600 ${studentid}) &
+    ( sleep 5; studentid=$(basename "$1"); "${SCRIPTDIR}/internal/cleanup_cgroup.sh" 600 ${studentid}) &
 
     while (( $(jobs -p | wc -l) >= $(( PARALLELJOBS * 2)) ))
     do
