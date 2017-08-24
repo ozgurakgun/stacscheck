@@ -181,4 +181,4 @@ done
 wait
 
 echo "-- Generating overview"
-"${SCRIPTDIR}/student_overview" "${outdir}/json"/* > "${outdir}/overview.html"
+"${SCRIPTDIR}/internal/student_overview" "${outdir}/json"/* > "${outdir}/overview.html"
